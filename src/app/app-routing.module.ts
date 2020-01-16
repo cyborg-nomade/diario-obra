@@ -8,7 +8,7 @@ import { DiarioComponent } from './diario/diario.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
-  { path: 'add-usuario', component: AddUserComponent },
+  { path: 'addusuario', component: AddUserComponent },
   { path: 'login', component: LoginComponent },
   { path: 'diario', component: DiarioComponent }
 ];
