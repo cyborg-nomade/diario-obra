@@ -1,1 +1,17 @@
-<p>add-user works!</p>
+<section class="signup-form">
+  <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <mat-form-field>
+      <input type="email" matInput placeholder="Seu e-mail" ngModel name="email" email required #emailInput="ngModel" />
+      <mat-error *ngIf="emailInput.hasError('required')">O campo não pode estar vazio</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">E-Mail inválido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="Should be at least 6 characters long.">
+      <input type="password" matInput placeholder="Sua senha" ngModel name="password" required minlength="6"
+        #pwInput="ngModel" />
+      <mat-hint align="end"> {{ pwInput.value?.length }} / 6</mat-hint>
+      <mat-error>Deve ter pelo menos 6 caracteres</mat-error>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary">Criar Usuário</button>
+  </form>
+</section>
