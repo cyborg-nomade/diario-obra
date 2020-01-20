@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +15,6 @@ import { ObrasConcluidasComponent } from './diario/obras-concluidas/obras-conclu
 import { ObrasFuturasComponent } from './diario/obras-futuras/obras-futuras.component';
 import { ObrasAtuaisComponent } from './diario/obras-atuais/obras-atuais.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     BrowserAnimationsModule,
     FormsModule,
     MaterialModule,
-    MatPasswordStrengthModule
+    MatPasswordStrengthModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
