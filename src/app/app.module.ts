@@ -14,6 +14,7 @@ import { ObrasConcluidasComponent } from './diario/obras-concluidas/obras-conclu
 import { ObrasFuturasComponent } from './diario/obras-futuras/obras-futuras.component';
 import { ObrasAtuaisComponent } from './diario/obras-atuais/obras-atuais.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     FlexLayoutModule,
     BrowserAnimationsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    MatPasswordStrengthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
