@@ -1,16 +1,26 @@
 <section class="signup-form">
   <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSubmit(f)">
     <mat-form-field>
-      <input type="email" matInput placeholder="Seu e-mail" ngModel name="email" email required #emailInput="ngModel" />
+      <input type="text" matInput placeholder="Nome do novo usuário" ngModel name="name" required #nameInput="ngModel" />
+      <mat-error *ngIf="nameInput.hasError('required')">O campo não pode estar vazio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" matInput placeholder="Identificador do novo usuário" ngModel name="id" required #idInput="ngModel" />
+      <mat-error *ngIf="idInput.hasError('required')">O campo não pode estar vazio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="email" matInput placeholder="E-mail do novo usuário" ngModel name="email" email required #emailInput="ngModel" />
       <mat-error *ngIf="emailInput.hasError('required')">O campo não pode estar vazio</mat-error>
       <mat-error *ngIf="!emailInput.hasError('required')">E-Mail inválido.</mat-error>
     </mat-form-field>
 
-    <mat-form-field hintLabel="Deve ter pelo menos 6 caracteres.">
-      <input type="password" matInput placeholder="Sua senha" ngModel name="password" required minlength="6"
+    <mat-form-field hintLabel="Deve ter pelo menos 8 caracteres.">
+      <input type="password" matInput placeholder="Senha do novo usuário" ngModel name="password" required minlength="8"
         #pwInput="ngModel" />
-      <mat-hint align="end"> {{ pwInput.value?.length }} / 6</mat-hint>
-      <mat-error>Deve ter pelo menos 6 caracteres</mat-error>
+      <mat-hint align="end"> {{ pwInput.value?.length }} / 8</mat-hint>
+      <mat-error>Deve ter pelo menos 8 caracteres</mat-error>
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary">Criar Usuário</button>
   </form>
