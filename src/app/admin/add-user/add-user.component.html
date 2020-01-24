@@ -1,1 +1,61 @@
-<p>add-user works!</p>
+<section class="signup-form">
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]=addUserForm
+    (ngSubmit)="onSubmit()">
+
+    <!-- username field -->
+    <mat-form-field>
+      <input type="text" matInput placeholder="Nome do novo usuário" formControlName="nome" />
+      <mat-error *ngIf="nome.invalid && (nome.dirty || nome.touched) && nome.errors.required">O campo não pode estar
+        vazio</mat-error>
+    </mat-form-field>
+
+    <!-- email field -->
+    <mat-form-field>
+      <input type="email" matInput placeholder="E-mail do novo usuário" formControlName="email" />
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.required">O campo não pode estar
+        vazio</mat-error>
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.email">E-Mail inválido.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- password field -->
+    <mat-form-field [color]="passwordComponent.color">
+      <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+
+      <input [type]="toggle.type" matInput placeholder="Senha do novo usuário"
+        [formControl]="passwordComponent.passwordFormControl" #passwordInput />
+      <mat-hint align="end" aria-live="polite">
+        {{ passwordInput.value?.length }} / {{ passwordComponent.max }}
+      </mat-hint>
+
+      <!-- password error messages-->
+      <mat-error *ngIf="passwordComponent.passwordFormControl.hasError('required')">
+        A senha é obrigatória
+      </mat-error>
+      <mat-error *ngIf="passwordComponent.passwordFormControl.hasError('pattern')">
+        A senha não é válida
+      </mat-error>
+    </mat-form-field>
+
+    <!--@angular-material-extensions/password-strength's main component-->
+    <mat-password-strength #passwordComponent (onStrengthChanged)="onStrengthChanged($event)"
+      [password]="passwordInput.value"></mat-password-strength>
+
+    <!--Password's strength info-->
+    <mat-password-strength-info lowerCaseCriteriaMsg="deve conter pelo menos um caractere minúsculo"
+      upperCaseCriteriaMsg="deve conter pelo menos um caractere maiúsculo"
+      digitsCriteriaMsg="deve conter pelo menos um caractere numérico"
+      specialCharsCriteriaMsg="deve conter pelo menos um caractere especial"
+      minCharsCriteriaMsg="deve conter pelo menos 8 caracteres" [passwordComponent]="passwordComponent">
+    </mat-password-strength-info>
+
+    <!-- checkbox user agreement -->
+    <mat-checkbox name="agree" color="primary" formControlName="agreed">
+      Concordar com os Termos e Condições de Utilização
+    </mat-checkbox>
+
+    <button type="submit" mat-raised-button color="primary" [disabled]="addUserForm.invalid">
+      Criar Usuário
+    </button>
+  </form>
+</section>
