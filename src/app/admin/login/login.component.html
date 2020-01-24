@@ -1,0 +1,21 @@
+<section class="signup-form">
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+      <input type="email" matInput placeholder="Seu e-mail" formControlName="email" />
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.required">O campo não pode estar
+        vazio.</mat-error>
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.email">E-Mail inválido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="password" matInput placeholder="Sua senha" formControlName="password" />
+      <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">O campo
+        não pode estar vazio.</mat-error>
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
+  </form>
+</section>
