@@ -1,44 +1,59 @@
 <section class="signup-form">
-  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]=addUserForm
+    (ngSubmit)="onSubmit()">
+
+    <!-- username field -->
     <mat-form-field>
-      <input type="text" matInput placeholder="Nome do novo usuário" ngModel name="name" required
-        #nameInput="ngModel" />
-      <mat-error *ngIf="nameInput.hasError('required')">O campo não pode estar vazio</mat-error>
+      <input type="text" matInput placeholder="Nome do novo usuário" formControlName="nome" />
+      <mat-error *ngIf="nome.invalid && (nome.dirty || nome.touched) && nome.errors.required">O campo não pode estar
+        vazio</mat-error>
     </mat-form-field>
 
+    <!-- email field -->
     <mat-form-field>
-      <input type="number" matInput placeholder="Identificador do novo usuário" ngModel name="id" required
-        #idInput="ngModel" />
-      <mat-error *ngIf="idInput.hasError('required')">O campo não pode estar vazio</mat-error>
+      <input type="email" matInput placeholder="E-mail do novo usuário" formControlName="email" />
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.required">O campo não pode estar
+        vazio</mat-error>
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.email">E-Mail inválido.
+      </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <input type="email" matInput placeholder="E-mail do novo usuário" ngModel name="email" email required
-        #emailInput="ngModel" />
-      <mat-error *ngIf="emailInput.hasError('required')">O campo não pode estar vazio</mat-error>
-      <mat-error *ngIf="!emailInput.hasError('required')">E-Mail inválido.</mat-error>
-    </mat-form-field>
-
+    <!-- password field -->
     <mat-form-field [color]="passwordComponent.color">
       <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
-      <input [type]="toggle.type" matInput #password placeholder="Senha do novo usuário" ngModel name="password"
-        required minlength="8" #pwInput="ngModel" />
+
+      <input [type]="toggle.type" matInput placeholder="Senha do novo usuário"
+        [formControl]="passwordComponent.passwordFormControl" #passwordInput />
       <mat-hint align="end" aria-live="polite">
-        {{ password.value.length }} / {{ passwordComponent.max }}
+        {{ passwordInput.value?.length }} / {{ passwordComponent.max }}
       </mat-hint>
+
+      <!-- password error messages-->
+      <mat-error *ngIf="passwordComponent.passwordFormControl.hasError('required')">
+        A senha é obrigatória
+      </mat-error>
+      <mat-error *ngIf="passwordComponent.passwordFormControl.hasError('pattern')">
+        A senha não é válida
+      </mat-error>
     </mat-form-field>
+
     <!--@angular-material-extensions/password-strength's main component-->
     <mat-password-strength #passwordComponent (onStrengthChanged)="onStrengthChanged($event)"
-      [password]="password.value"></mat-password-strength>
+      [password]="passwordInput.value"></mat-password-strength>
+
     <!--Password's strength info-->
-    <mat-password-strength-info [passwordComponent]="passwordComponent"
-      lowerCaseCriteriaMsg="deve conter pelo menos um caractere minúsculo"
+    <mat-password-strength-info lowerCaseCriteriaMsg="deve conter pelo menos um caractere minúsculo"
       upperCaseCriteriaMsg="deve conter pelo menos um caractere maiúsculo"
       digitsCriteriaMsg="deve conter pelo menos um caractere numérico"
       specialCharsCriteriaMsg="deve conter pelo menos um caractere especial"
       minCharsCriteriaMsg="deve conter pelo menos 8 caracteres" [passwordComponent]="passwordComponent">
     </mat-password-strength-info>
-    <button type="submit" mat-raised-button color="primary">
+
+    <mat-checkbox name="agree" color="primary" formControlName="agreed">
+      Concordar com os Termos e Condições de Utilização
+    </mat-checkbox>
+
+    <button type="submit" mat-raised-button color="primary" [disabled]="addUserForm.invalid">
       Criar Usuário
     </button>
   </form>
