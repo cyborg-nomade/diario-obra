@@ -15,6 +15,8 @@ import { ObrasConcluidasComponent } from './diario/obras-concluidas/obras-conclu
 import { ObrasFuturasComponent } from './diario/obras-futuras/obras-futuras.component';
 import { ObrasAtuaisComponent } from './diario/obras-atuais/obras-atuais.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { HeaderComponent } from './nav/header/header.component';
+import { SidenavComponent } from './nav/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     ObrasConcluidasComponent,
     ObrasFuturasComponent,
     ObrasAtuaisComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    HeaderComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
